@@ -18,8 +18,20 @@ getData(): Promise<any[]>{
 
 initDB() {
         this._db = new PouchDB('StoreOne', { adapter: 'websql' });
+
+        console.log(data.length);
+        for( let i = -1; i<=data.length;i++)
+         this.add(data.pop(i));
+         this.add(data.pop(-1));
+
+
+
         console.log("Db initialized");
 }
+
+add(obj) {
+        return this._db.post(obj);
+    }
 
 
 

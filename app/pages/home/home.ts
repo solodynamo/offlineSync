@@ -33,4 +33,12 @@ export class HomePage {
         this.ourData = res;
       });
     }
+
+    // save(obj) {
+    //
+    //         this.OfflineService.add(this.obj)
+    //             .catch(console.error.bind(console));
+    //
+    // }
+
 }
