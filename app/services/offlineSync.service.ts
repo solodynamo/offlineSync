@@ -10,6 +10,7 @@ let PouchDB = require ('pouchdb');
 export class OfflineService {
   private _db;
   private _data;
+  private _dataArray:any[];
 
 getData(): Promise<any[]>{
 
@@ -40,5 +41,27 @@ destroyDb(){
     console.log("Tables in db destroying ...Success!!");
   })
 }
+
+getAll(): any {
+
+  return this._db.allDocs({ include_docs: true })
+          .then(docs => {
+
+              // Each row has a .doc object and we just want to send an
+              // array of birthday objects back to the calling controller,
+              // so let's map the array to contain just the .doc objects.
+
+              this._dataArray = docs.rows.map(row => {
+
+                  return row.doc;
+              });
+
+
+
+
+              return this._dataArray;
+          });
+    }
+
 
 }

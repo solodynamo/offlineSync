@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component,NgZone} from "@angular/core";
 import {NavController, Platform} from 'ionic-angular';
 import {OfflineService} from '../../services/offlineSync.service';
 
@@ -11,7 +11,9 @@ export class HomePage {
 
     constructor(private OfflineService: OfflineService,
         private nav: NavController,
-        private platform: Platform)
+        private zone:NgZone,
+        private platform: Platform
+         )
 {}
 
 
@@ -25,13 +27,12 @@ export class HomePage {
     ourData:any[];
     getData() {
 
-
-      this.OfflineService.getData().then((res)=>{
-
-        console.log("gettting it ",res);
-
-        this.ourData = res;
-      });
+      this.OfflineService.getAll().then((data) =>{
+        this.zone.run(()=>{
+          console.log(data);
+          this.ourData = data;
+        });
+      })
     }
 
     // save(obj) {
