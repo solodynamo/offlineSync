@@ -5,19 +5,19 @@ import {HomePage} from './pages/home/home';
 import {OfflineService} from './services/offlineSync.service';
 
 @Component({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [OfflineService]
+    template: '<ion-nav [root]="rootPage"></ion-nav>',
+    providers: [OfflineService]
 })
 export class MyApp {
-  rootPage: any = HomePage;
+    rootPage: any = HomePage;
 
-  constructor(platform: Platform) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-    });
-  }
+    constructor(platform: Platform) {
+        platform.ready().then(() => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            StatusBar.styleDefault();
+        });
+    }
 }
 
 ionicBootstrap(MyApp);
