@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {NavController, Platform} from 'ionic-angular';
-import {StarterService} from '../../services/starter.service';
+import {OfflineService} from '../../services/offlineSync.service';
 
 
 @Component({
@@ -9,7 +9,7 @@ import {StarterService} from '../../services/starter.service';
 export class HomePage {
 
 
-    constructor(private starterService: StarterService,
+    constructor(private OfflineService: OfflineService,
         private nav: NavController,
         private platform: Platform)
 {}
@@ -18,6 +18,7 @@ export class HomePage {
     ionViewLoaded() {
         this.platform.ready().then(() => {
           //Do Here which you want should happen as app starts
+          this.OfflineService.initDB();
 
         });
     }
@@ -25,7 +26,7 @@ export class HomePage {
     getData() {
 
 
-      this.starterService.getData().then((res)=>{
+      this.OfflineService.getData().then((res)=>{
 
         console.log("gettting it ",res);
 
