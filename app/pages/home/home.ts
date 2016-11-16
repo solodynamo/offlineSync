@@ -42,4 +42,14 @@ export class HomePage {
     //
     // }
 
+    refresh(refresher){
+      console.log("Refreshing the list . .........");
+      this.OfflineService.populateData();
+    setTimeout(() => {
+     console.log('Async operation has ended');
+     refresher.complete();
+    }, 2000);
+
+    }
+
 }
