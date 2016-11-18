@@ -11,7 +11,10 @@
 
 <ion-content padding class="details">
   <ion-list inset>
-  This is Details Page
+  <ion-label>Title:</ion-label>
+  <ion-input type="text" [(ngModel)]="homeObj.title"></ion-input>
+  <ion-label>Description:</ion-label>
+  <ion-input type="text" [(ngModel)]="homeObj.body"></ion-input>
   </ion-list>
 
 </ion-content>

@@ -10,7 +10,9 @@ export class DetailsPage {
 
  constructor(private viewCtrl:ViewController,private navParams: NavParams){}
  ionViewLoaded() {
-        this.homeObj = this.navParams.get('obj');
+        this.homeObj = this.navParams.get('birthday');
+        console.log(this.homeObj);
+
     }
   dismiss() {
           this.viewCtrl.dismiss(this.homeObj);
