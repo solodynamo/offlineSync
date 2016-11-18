@@ -27,12 +27,21 @@ export class HomePage {
     ourData: any[];
     getData() {
 
-        this.OfflineService.getAll().then((data) => {
-            this.zone.run(() => {
-                console.log(data);
-                this.ourData = data;
-            });
-        })
+        // this.OfflineService.getAll().then((data) => {
+        //     this.zone.run(() => {
+        //         console.log(data);
+        //         this.ourData = data;
+        //     });
+        // })
+
+        this.OfflineService.getComments()
+                           .subscribe(
+                               comments => this.ourData = comments, //Bind to view
+                                err => {
+                                    // Log errors if any
+                                    console.log(err);
+        });
+
     }
 
 

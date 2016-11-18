@@ -14,8 +14,8 @@
     </ion-refresher>
     <ion-list>
         <ion-item *ngFor="let obj of ourData">
-            <div>{{obj.name}}</div>
-            <div>{{obj.rollNo}}</div>
+            <div>{{obj.title}}</div>
+            <div>{{obj.body}}</div>
         </ion-item>
 
         <button class="button button-full button-calm" (click)="getData()">
