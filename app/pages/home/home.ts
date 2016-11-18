@@ -1,6 +1,7 @@
 import {Component, NgZone} from "@angular/core";
-import {NavController, Platform} from 'ionic-angular';
+import {NavController, Platform, Modal} from 'ionic-angular';
 import {OfflineService} from '../../services/offlineSync.service';
+import {DetailsPage} from '../details/details';
 
 
 @Component({
@@ -64,12 +65,21 @@ export class HomePage {
 
     clearTable(){
       this.OfflineService.destroyDb();
-      this.ourData = [{'title':"No Data In Table",'body':"You Must Have Click Clear Table Button"}];
+      this.ourData = [{'title':"No Data In Table",'body':"You Must Have Clicked Clear Table Button"}];
       HomePage.count= 0;
     }
 
     get staticUrlArray() {
     return HomePage.count;
+    }
+
+    showDetail(obj) {
+        let modal = Modal.create(DetailsPage, { birthday: obj });
+        this.nav.present(modal);
+
+        modal.onDismiss(() => {
+
+        });
     }
 
 
