@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 
 export class UrlService {
 
-  constructor(){}
+    constructor() { }
 
-  base_url:any = 'https://jsonplaceholder.typicode.com';
+    base_url: any = 'https://jsonplaceholder.typicode.com';
 }

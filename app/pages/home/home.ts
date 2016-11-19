@@ -8,7 +8,7 @@ import {DetailsPage} from '../details/details';
     templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
-  static count : number = 0;
+    static count: number = 0;
 
 
     constructor(private OfflineService: OfflineService,
@@ -37,13 +37,15 @@ export class HomePage {
         // })
 
         this.OfflineService.getComments()
-                           .subscribe(
-                               comments => {this.ourData = comments
-                               HomePage.count = comments.length}, //Bind to view
-                                err => {
-                                    // Log errors if any
-                                    console.log(err);
-        });
+            .subscribe(
+            comments => {
+            this.ourData = comments
+                HomePage.count = comments.length
+            }, //Bind to view
+            err => {
+                // Log errors if any
+                console.log(err);
+            });
 
     }
 
@@ -52,10 +54,10 @@ export class HomePage {
         console.log("Refreshing the list . .........");
         // this.OfflineService.populateData();
         this.OfflineService.getComments()
-                          .subscribe( comments =>{
-                            this.ourData = comments
-                            HomePage.count += comments.length
-                          })
+            .subscribe(comments => {
+                this.ourData = comments
+                HomePage.count += comments.length
+            })
         setTimeout(() => {
             console.log('Async operation has ended');
             refresher.complete();
@@ -63,14 +65,14 @@ export class HomePage {
 
     }
 
-    clearTable(){
-      this.OfflineService.destroyDb();
-      this.ourData = [{'title':"No Data In Table",'body':"You Must Have Clicked Clear Table Button"}];
-      HomePage.count= 0;
+    clearTable() {
+        this.OfflineService.destroyDb();
+        this.ourData = [{ 'title': "No Data In Table", 'body': "You Must Have Clicked Clear Table Button" }];
+        HomePage.count = 0;
     }
 
     get staticUrlArray() {
-    return HomePage.count;
+        return HomePage.count;
     }
 
     showDetail(obj) {

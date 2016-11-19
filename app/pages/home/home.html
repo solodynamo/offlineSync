@@ -12,7 +12,8 @@
 
         </ion-refresher-content>
     </ion-refresher>
-    <ion-tem><h1>Total No Of Entries:{{staticUrlArray}}</h1></ion-tem>
+    <ion-tem>
+        <h1>Total No Of Entries:{{staticUrlArray}}</h1></ion-tem>
     <ion-list>
         <ion-item *ngFor="let obj of ourData" (click)="showDetail(obj)">
             <div><b>Title</b> : {{obj.title}}</div>

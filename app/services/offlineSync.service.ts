@@ -16,7 +16,7 @@ export class OfflineService {
     private _data;
     private _dataArray: any[];
 
-    constructor(private http: Http){}
+    constructor(private http: Http) { }
 
     private dataUrl = 'https://jsonplaceholder.typicode.com/posts/';
 
@@ -25,13 +25,18 @@ export class OfflineService {
         return Promise.resolve(data);
     }
 
-    getComments() : Observable<Comment[]>{
-    // ...using get request
-    return this.http.get(this.dataUrl)
-                   // ...and calling .json() on the response to return data
-                    .map((res:Response) => res.json())
-                    //...errors if any
-                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    getComments(): Observable<Comment[]> {
+
+        this._db.changes({ live: true, since: 'now', include_docs: true })
+            .on('change', this.dataBaseChange);
+
+        // ...using get request
+        return this.http.get(this.dataUrl)
+            // ...and calling .json() on the response to return data
+            .map((res: Response) => res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
 
     }
 
@@ -53,6 +58,22 @@ export class OfflineService {
         })
     }
 
+    update(obj) {
+        console.log("ust before", obj);
+
+        return this._db.put(obj, (err, res) => {
+            if (err) {
+                console.info('error creating new doc', err);
+
+            }
+            if (res) {
+                console.info('new doc created', res);
+
+            }
+        });
+    }
+
+
     getAll(): any {
 
         return this._db.allDocs({ include_docs: true })
@@ -73,6 +94,11 @@ export class OfflineService {
             });
     }
 
+
+    delete(obj) {
+        return this._db.remove(obj);
+    }
+
     populateData(): any {
         console.log(data.length);
         // this.destroyDb();
@@ -81,5 +107,9 @@ export class OfflineService {
         this.add(data.pop(-1));
 
 
+    }
+
+    dataBaseChange() {
+        console.log("changes in DB");
     }
 }
