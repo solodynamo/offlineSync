@@ -2,12 +2,17 @@ import {Injectable} from '@angular/core';
 import {UrlService} from './offlineSync.url-service';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
+import {Network} from "ionic-native";
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 var data = require("./data.json");
 let PouchDB = require('pouchdb');
+
+
+
 
 @Injectable()
 
@@ -85,10 +90,19 @@ export class OfflineService {
         this._db.changes({ live: true, since: 'now', include_docs: true })
             .on('change', this.dataBaseChange);
 
+
         this.callBackend();
 
 
         console.log("Db initialized");
+        let disconnectSubscription = Network.onDisconnect().subscribe(() => {
+            console.log('network was disconnected :-(');
+        });
+
+        let connectSubscription = Network.onConnect().subscribe(() => {
+            console.log('network connected!');
+        });
+
     }
 
 
