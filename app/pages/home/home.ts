@@ -36,10 +36,10 @@ export class HomePage {
         //     });
         // })
 
-        this.OfflineService.getComments()
-            .subscribe(
+        this.OfflineService.getAll()
+            .then(
             comments => {
-            this.ourData = comments
+                this.ourData = comments
                 HomePage.count = comments.length
             }, //Bind to view
             err => {
@@ -53,11 +53,13 @@ export class HomePage {
     refresh(refresher) {
         console.log("Refreshing the list . .........");
         // this.OfflineService.populateData();
-        this.OfflineService.getComments()
-            .subscribe(comments => {
-                this.ourData = comments
-                HomePage.count += comments.length
-            })
+        this.OfflineService.callBackend();
+        // .then(comments => {
+        //     // this.ourData = comments
+        //     // HomePage.count += comments.length
+        //
+        // })
+
         setTimeout(() => {
             console.log('Async operation has ended');
             refresher.complete();

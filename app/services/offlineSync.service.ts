@@ -20,15 +20,21 @@ export class OfflineService {
 
     private dataUrl = 'https://jsonplaceholder.typicode.com/posts/';
 
+
+
+
+
     getData(): Promise<any[]> {
 
         return Promise.resolve(data);
     }
 
+
+
+
+    //this function calls the backend for getting new complaints/comments
     getComments(): Observable<Comment[]> {
 
-        this._db.changes({ live: true, since: 'now', include_docs: true })
-            .on('change', this.dataBaseChange);
 
         // ...using get request
         return this.http.get(this.dataUrl)
@@ -37,19 +43,65 @@ export class OfflineService {
             //...errors if any
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
+    }
+
+
+
+
+    //Here i am trying to populate the data from backend
+
+    callBackend() {
+
+        this.getComments()
+            .subscribe(comments => {
+                this._dataArray = comments;
+                console.log(this._dataArray);
+                this.storeInWebsql(this._dataArray);
+            })
+
+
+        // this.storeInWebsql(this._dataArray);
 
     }
+
+
+    //Here i am inserting the data in websql
+    storeInWebsql(arrayOfData) {
+
+        for (let i = -1; i <= arrayOfData.length; i++)
+            this.add(arrayOfData.pop(i));
+        this.add(arrayOfData.pop(-1));
+
+    }
+
+
+
+
 
 
     initDB() {
         this._db = new PouchDB('StoreOne', { adapter: 'websql' });
 
+        this._db.changes({ live: true, since: 'now', include_docs: true })
+            .on('change', this.dataBaseChange);
+
+        this.callBackend();
+
+
         console.log("Db initialized");
     }
+
+
+
+
 
     add(obj) {
         return this._db.post(obj);
     }
+
+
+
+
 
     destroyDb() {
 
@@ -57,6 +109,10 @@ export class OfflineService {
             console.log("Tables in db destroying ...Success!!");
         })
     }
+
+
+
+
 
     update(obj) {
         console.log("ust before", obj);
@@ -74,20 +130,19 @@ export class OfflineService {
     }
 
 
+
+
+
+    // I am Keeping this as store for getting offline data
     getAll(): any {
 
         return this._db.allDocs({ include_docs: true })
             .then(docs => {
 
-                // Each row has a .doc object and we just want to send an
-                // array of birthday objects back to the calling controller,
-                // so let's map the array to contain just the .doc objects.
 
                 this._dataArray = docs.rows.map(row => {
                     return row.doc;
                 });
-
-
 
 
                 return this._dataArray;
@@ -95,9 +150,16 @@ export class OfflineService {
     }
 
 
+
+
+
     delete(obj) {
         return this._db.remove(obj);
     }
+
+
+
+
 
     populateData(): any {
         console.log(data.length);
@@ -106,10 +168,16 @@ export class OfflineService {
             this.add(data.pop(i));
         this.add(data.pop(-1));
 
-
     }
 
+
+
+    //this function will track the database changes
     dataBaseChange() {
         console.log("changes in DB");
     }
+
+
+
+
 }
