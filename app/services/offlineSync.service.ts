@@ -115,7 +115,8 @@ export class OfflineService {
 
 
     update(obj) {
-        console.log("ust before", obj);
+        console.log("Object Getting Updated", obj);
+
 
         return this._db.put(obj, (err, res) => {
             if (err) {

@@ -71,6 +71,7 @@ export class HomePage {
         this.OfflineService.destroyDb();
         this.ourData = [{ 'title': "No Data In Table", 'body': "You Must Have Clicked Clear Table Button" }];
         HomePage.count = 0;
+        this.OfflineService.initDB();
     }
 
     get staticUrlArray() {
