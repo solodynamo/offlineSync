@@ -5,6 +5,9 @@ import {DetailsPage} from '../details/details';
 import {Events} from 'ionic-angular';
 
 
+
+
+
 @Component({
     templateUrl: 'build/pages/home/home.html'
 })
@@ -17,6 +20,8 @@ export class HomePage {
         private zone: NgZone,
         private platform: Platform,
         private events: Events
+
+
     ) {
         this.events.subscribe('Destroyed', () => {
             console.log("Db destroyed ....refreshing.....")
@@ -29,21 +34,13 @@ export class HomePage {
 
     ionViewLoaded() {
         this.platform.ready().then(() => {
-            //Do Here which you want should happen as app starts
+
             this.OfflineService.initDB();
 
         });
     }
     ourData: any[];
     getData() {
-
-        // this.OfflineService.getAll().then((data) => {
-        //     this.zone.run(() => {
-        //         console.log(data);
-        //         this.ourData = data;
-        //     });
-        // })
-
         this.OfflineService.getAll()
             .then(
             comments => {
@@ -67,13 +64,8 @@ export class HomePage {
 
     refresh(refresher) {
         console.log("Refreshing the list . .........");
-        // this.OfflineService.populateData();
+
         this.OfflineService.callBackend();
-        // .then(comments => {
-        //     // this.ourData = comments
-        //     // HomePage.count += comments.length
-        //
-        // })
 
         setTimeout(() => {
             console.log('Async operation has ended');
@@ -87,16 +79,13 @@ export class HomePage {
         console.log("database destroyed");
         this.ourData = [{ 'title': "No Data In Table", 'body': "You Must Have Clicked Clear Table Button" }];
         HomePage.count = 0;
-        // this.OfflineService.initDB();
+
     }
 
     get staticUrlArray() {
         return HomePage.count;
     }
 
-    initializeDb() {
-        this.OfflineService.initDB();
-    }
 
     showDetail(obj) {
         let modal = Modal.create(DetailsPage, { birthday: obj });
