@@ -2,6 +2,7 @@ import {Component, NgZone} from "@angular/core";
 import {NavController, Platform, Modal} from 'ionic-angular';
 import {OfflineService} from '../../services/offlineSync.service';
 import {DetailsPage} from '../details/details';
+import {Events} from 'ionic-angular';
 
 
 @Component({
@@ -14,9 +15,16 @@ export class HomePage {
     constructor(private OfflineService: OfflineService,
         private nav: NavController,
         private zone: NgZone,
-        private platform: Platform
-    )
-    { }
+        private platform: Platform,
+        private events: Events
+    ) {
+        this.events.subscribe('Destroyed', () => {
+            console.log("Db destroyed ....refreshing.....")
+            location.reload();
+        });
+
+
+    }
 
 
     ionViewLoaded() {
@@ -45,9 +53,16 @@ export class HomePage {
             err => {
                 // Log errors if any
                 console.log(err);
+                console.log("creating a new one.....Refresh");
+                if (err) {
+
+                    this.OfflineService.initDB();
+                }
             });
 
     }
+
+
 
 
     refresh(refresher) {
@@ -69,13 +84,18 @@ export class HomePage {
 
     clearTable() {
         this.OfflineService.destroyDb();
+        console.log("database destroyed");
         this.ourData = [{ 'title': "No Data In Table", 'body': "You Must Have Clicked Clear Table Button" }];
         HomePage.count = 0;
-        this.OfflineService.initDB();
+        // this.OfflineService.initDB();
     }
 
     get staticUrlArray() {
         return HomePage.count;
+    }
+
+    initializeDb() {
+        this.OfflineService.initDB();
     }
 
     showDetail(obj) {
@@ -86,6 +106,7 @@ export class HomePage {
 
         });
     }
+
 
 
 }

@@ -3,6 +3,7 @@ import {UrlService} from './offlineSync.url-service';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {Network} from "ionic-native";
+import {Events} from "ionic-angular";
 
 
 import 'rxjs/add/operator/map';
@@ -21,7 +22,7 @@ export class OfflineService {
     private _data;
     private _dataArray: any[];
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private events: Events) { }
 
     private dataUrl = 'https://jsonplaceholder.typicode.com/posts/';
 
@@ -88,7 +89,10 @@ export class OfflineService {
         this._db = new PouchDB('StoreOne', { adapter: 'websql' });
 
         this._db.changes({ live: true, since: 'now', include_docs: true })
-            .on('change', this.dataBaseChange);
+            .on('change', this.dataBaseChange)
+            .on('destroyed', function() {
+                console.log("klasjfkljskfjslkfjl");
+            })
 
 
         this.callBackend();
@@ -121,8 +125,14 @@ export class OfflineService {
 
         this._db.destroy().then(function() {
             console.log("Tables in db destroying ...Success!!");
+
         })
+
+        this.events.publish("Destroyed");
+
+
     }
+
 
 
 
@@ -191,6 +201,8 @@ export class OfflineService {
     dataBaseChange() {
         console.log("changes in DB");
     }
+
+
 
 
 
