@@ -28,6 +28,8 @@ export class HomePage {
             location.reload();
         });
 
+        this.events.publish('InitializeDb');
+
 
     }
 
@@ -35,11 +37,13 @@ export class HomePage {
     ionViewLoaded() {
         this.platform.ready().then(() => {
 
-            this.OfflineService.initDB();
+            // this.OfflineService.initDB();
 
         });
     }
     ourData: any[];
+
+
     getData() {
         this.OfflineService.getAll()
             .then(

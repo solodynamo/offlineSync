@@ -22,7 +22,12 @@ export class OfflineService {
     private _data;
     private _dataArray: any[];
 
-    constructor(private http: Http, private events: Events) { }
+    constructor(private http: Http, private events: Events) {
+
+      this.events.subscribe('InitializeDb',()=>{
+        this.initDB();
+      });
+    }
 
     private dataUrl = 'https://jsonplaceholder.typicode.com/posts/';
 
