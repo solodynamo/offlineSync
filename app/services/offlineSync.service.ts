@@ -130,10 +130,9 @@ export class OfflineService {
 
         this._db.destroy().then(function() {
             console.log("Tables in db destroying ...Success!!");
+            // this.events.publish("Destroyed");
 
         })
-
-        this.events.publish("Destroyed");
 
 
     }
