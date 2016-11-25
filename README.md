@@ -1,3 +1,8 @@
-# Ionic V2 Starter
+# Offline Sync
 
-####Get You Started With Ionic 2 Fast!!
+##It uses pouchDB with websql to provide offline sync with DB when internet connection of an application goes off.
+
+###Clone the repo
+####cd offlineSync
+####npm install
+####ionic serve
