@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>DetailsPage</ion-title>
+        <ion-buttons end>
+            <button (click)="delete()">
+          <ion-icon name="trash"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="details">
+    <ion-list inset>
+        <ion-label>Title:</ion-label>
+        <ion-input type="text" [(ngModel)]="homeObj.title"></ion-input>
+        <ion-label>Description:</ion-label>
+        <ion-input type="text" [(ngModel)]="homeObj.body"></ion-input>
+    </ion-list>
+    <button block (click)="save()">Save</button>
+</ion-content>
