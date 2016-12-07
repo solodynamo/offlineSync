@@ -3,6 +3,11 @@
 
 It uses pouchDB with websql as adapter to provide offline sync with DB when internet connection of an application goes off.
 
+### Snap
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/7fJtQ"><a href="//imgur.com/7fJtQ"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+
 ## Getting Started
 * Install Ionic CLI `npm install ionic -g --save`
 * Install Cordova `npm install -g cordova`
