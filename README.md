@@ -43,3 +43,7 @@ It uses pouchDB with websql as adapter to provide offline sync with DB when inte
 ## Build and Run
 * ionic build ios/android
 * ionic run ios/android --emulator --devices
+
+##To Do
+* Use CouchDB for complete sync.
+* Netowork status response and action improve.(Offline/Online)
