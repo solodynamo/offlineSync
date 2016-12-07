@@ -1,10 +1,16 @@
 ## Offline Sync
+ [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+
 
 
 It uses pouchDB with websql as adapter to provide offline sync with DB when internet connection of an application goes off.
 
 ### Snap
 <img src="http://i.imgur.com/TkIOMPm.jpg" width="600" alt="Sky Blue"/>
+
+### Demo
+
+<a target="_blank" href="https://www.dropbox.com/s/g3hrmkhysc2bkt7/offlineSync.apk?dl=0">Android Apk</a>
 
 
 
