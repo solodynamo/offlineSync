@@ -4,8 +4,8 @@
 It uses pouchDB with websql as adapter to provide offline sync with DB when internet connection of an application goes off.
 
 ### Snap
+<img src="http://i.imgur.com/TkIOMPm.jpg" width="600" alt="Sky Blue"/>
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/7fJtQ"><a href="//imgur.com/7fJtQ"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 
 ## Getting Started
